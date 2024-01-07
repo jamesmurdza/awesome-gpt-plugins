@@ -1,0 +1,253 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Weather API
+  license:
+    name: MIT
+servers:
+  - url: https://api.weather.gov
+paths:
+  /points/{coordinates}:
+    get:
+      summary: Get weather information for specific coordinates
+      operationId: getWeatherByCoordinates
+      tags:
+        - weather
+      parameters:
+        - name: coordinates
+          in: path
+          required: true
+          description: Coordinates in the format "latitude,longitude" (e.g., "38.8894,-77.0352")
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Weather information response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeatherInfo"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /gridpoints/{forecastLetters}/{forecastNumbers}/forecast:
+    get:
+      summary: Get weather forecast information by URL
+      operationId: getWeatherForecastByUrl
+      tags:
+        - weather
+      parameters:
+        - name: forecastLetters
+          in: path
+          required: true
+          description: The letters component take out of the weather forecast URL
+          schema:
+            type: string
+        - name: forecastNumbers
+          in: path
+          required: true
+          description: The number component take out of the weather forecast URL
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Weather forecast information response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeatherForecast"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    WeatherInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+            coordinates:
+              type: array
+              items:
+                type: number
+        properties:
+          type: object
+          properties:
+            cwa:
+              type: string
+            forecastOffice:
+              type: string
+            gridId:
+              type: string
+            gridX:
+              type: integer
+            gridY:
+              type: integer
+            forecast:
+              type: string
+            forecastHourly:
+              type: string
+            forecastGridData:
+              type: string
+            observationStations:
+              type: string
+            relativeLocation:
+              type: object
+              properties:
+                type:
+                  type: string
+                geometry:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    coordinates:
+                      type: array
+                      items:
+                        type: number
+                properties:
+                  type: object
+                  properties:
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    distance:
+                      type: object
+                      properties:
+                        unitCode:
+                          type: string
+                        value:
+                          type: number
+                    bearing:
+                      type: object
+                      properties:
+                        unitCode:
+                          type: string
+                        value:
+                          type: number
+            forecastZone:
+              type: string
+            county:
+              type: string
+            fireWeatherZone:
+              type: string
+            timeZone:
+              type: string
+            radarStation:
+              type: string
+    WeatherForecast:
+      type: object
+      properties:
+        type:
+          type: string
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+            coordinates:
+              type: array
+              items:
+                type: array
+                items:
+                  type: number
+        properties:
+          type: object
+          properties:
+            updated:
+              type: string
+              format: date-time
+            units:
+              type: string
+            forecastGenerator:
+              type: string
+            generatedAt:
+              type: string
+              format: date-time
+            updateTime:
+              type: string
+              format: date-time
+            validTimes:
+              type: string
+            elevation:
+              type: object
+              properties:
+                unitCode:
+                  type: string
+                value:
+                  type: number
+            periods:
+              type: array
+              items:
+                type: object
+                properties:
+                  number:
+                    type: integer
+                  name:
+                    type: string
+                  startTime:
+                    type: string
+                    format: date-time
+                  endTime:
+                    type: string
+                    format: date-time
+                  isDaytime:
+                    type: boolean
+                  temperature:
+                    type: integer
+                  temperatureUnit:
+                    type: string
+                  temperatureTrend:
+                    type: string
+                  probabilityOfPrecipitation:
+                    type: object
+                    properties:
+                      unitCode:
+                        type: string
+                      value:
+                        type: number
+                  dewpoint:
+                    type: object
+                    properties:
+                      unitCode:
+                        type: string
+                      value:
+                        type: number
+                  relativeHumidity:
+                    type: object
+                    properties:
+                      unitCode:
+                        type: string
+                      value:
+                        type: number
+                  windSpeed:
+                    type: string
+                  windDirection:
+                    type: string
+                  icon:
+                    type: string
+                  shortForecast:
+                    type: string
+                  detailedForecast:
+                    type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Get Random User Data
+  license:
+    name: MIT
+servers:
+  - url: "https://randomuser.me/api/"
+paths:
+  /:
+    get:
+      description: "Get random user data"
+      operationId: "GetRandomUserData"
+      responses:
+        "200":
+          description: "Successful response with user data"
+          content:
+            application/json:
+              example:
+                results:
+                  - gender: "female"
+                    name:
+                      title: "Mrs"
+                      first: "Grace"
+                      last: "Warren"
+                    location:
+                      street:
+                        number: 7735
+                        name: "Walnut Hill Ln"
+                      city: "Davenport"
+                      state: "Tennessee"
+                      country: "United States"
+                      postcode: 49069
+                      coordinates:
+                        latitude: "88.6883"
+                        longitude: "119.5317"
+                      timezone:
+                        offset: "+2:00"
+                        description: "Kaliningrad, South Africa"
+                    email: "grace.warren@example.com"
+                    login:
+                      uuid: "5e68ce3d-6677-4db9-a3a4-e0e891182953"
+                      username: "goldentiger101"
+                      password: "mustang1"
+                      salt: "yEC3TM6o"
+                      md5: "8bf79ed1600b24ebfa3e1e9ca07e78c5"
+                      sha1: "34f6ae6afa64fbca35d44c4040948e81655a03d4"
+                      sha256: "041a0b7bfbe76150456bffca0d4309cc64067dfdd2b93224474fb3bb4151d981"
+                    dob:
+                      date: "1997-01-03T02:56:26.209Z"
+                      age: 27
+                    registered:
+                      date: "2012-09-18T05:57:22.278Z"
+                      age: 11
+                    phone: "(215) 363-2742"
+                    cell: "(799) 929-8206"
+                    id:
+                      name: "SSN"
+                      value: "270-09-6726"
+                    picture:
+                      large: "https://randomuser.me/api/portraits/women/56.jpg"
+                      medium: "https://randomuser.me/api/portraits/med/women/56.jpg"
+                      thumbnail: "https://randomuser.me/api/portraits/thumb/women/56.jpg"
+                    nat: "US"
+                info:
+                  seed: "68ea5229a628228c"
+                  results: 1
+                  page: 1
+                  version: "1.4"

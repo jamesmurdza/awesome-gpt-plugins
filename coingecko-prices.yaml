@@ -1,0 +1,60 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: CoinGecko API
+  license:
+    name: MIT
+servers:
+  - url: https://api.coingecko.com/api/v3
+paths:
+  /simple/price:
+    get:
+      summary: Get the current price of Bitcoin in USD
+      operationId: getPrice
+      tags:
+        - cryptocurrency
+      parameters:
+        - name: ids
+          in: query
+          description: The cryptocurrency id (e.g., bitcoin)
+          required: true
+          schema:
+            type: string
+        - name: vs_currencies
+          in: query
+          description: The target currency (e.g., usd)
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bitcoin:
+                    type: object
+                    properties:
+                      usd:
+                        type: number
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

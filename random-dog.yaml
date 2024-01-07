@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Get Random Dog Image
+  license:
+    name: MIT
+servers:
+  - url: https://dog.ceo/api
+paths:
+  /breeds/image/random:
+    get:
+      description: Get a random dog image
+      operationId: GetRandomDogImage
+      responses:
+        "200":
+          description: A random dog image URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DogImageResponse"
+      deprecated: false
+components:
+  schemas:
+    DogImageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          format: uri
+          description: The URL of the dog image
+        status:
+          type: string
+          description: The status of the response
+      required:
+        - message
+        - status
