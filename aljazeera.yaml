@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: Al Jazeera RSS Feed API
+  description: Access the RSS feed of Al Jazeera's website.
+  version: 1.0.0
+servers:
+  - url: https://www.aljazeera.com
+    description: Al Jazeera RSS Feed Server
+paths:
+  /xml/rss/all.xml:
+    get:
+      operationId: getAlJazeeraRssFeed
+      summary: Retrieve the RSS feed of Al Jazeera's website
+      responses:
+        "200":
+          description: RSS feed of Al Jazeera's website
+          content:
+            application/rss+xml:
+              schema:
+                type: string

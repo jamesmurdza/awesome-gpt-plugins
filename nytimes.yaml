@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: New York Times RSS Feed API
+  description: Access the RSS feed of The New York Times homepage.
+  version: 1.0.0
+servers:
+  - url: https://rss.nytimes.com
+    description: New York Times RSS Feed Server
+paths:
+  /services/xml/rss/nyt/HomePage.xml:
+    get:
+      operationId: getHomepageRssFeed
+      summary: Retrieve the RSS feed of the NYT homepage
+      responses:
+        "200":
+          description: RSS feed of the New York Times homepage
+          content:
+            application/rss+xml:
+              schema:
+                type: string

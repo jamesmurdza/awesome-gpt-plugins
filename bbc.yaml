@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: BBC News RSS Feed API
+  description: Access the RSS feed of BBC News' world section.
+  version: 1.0.0
+servers:
+  - url: https://feeds.bbci.co.uk
+    description: BBC News RSS Feed Server
+paths:
+  /news/world/rss.xml:
+    get:
+      operationId: getWorldNewsRssFeed
+      summary: Retrieve the RSS feed of BBC News' world section
+      responses:
+        "200":
+          description: RSS feed of BBC News' world section
+          content:
+            application/rss+xml:
+              schema:
+                type: string
