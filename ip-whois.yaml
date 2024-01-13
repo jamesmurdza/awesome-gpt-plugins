@@ -1,0 +1,123 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: IPWhois Service
+  license:
+    name: MIT
+servers:
+  - url: https://ipwho.is
+paths:
+  /{ip}:
+    get:
+      summary: Get IP information
+      operationId: getIpInfo
+      tags:
+        - IP Lookup
+      parameters:
+        - name: ip
+          in: path
+          required: true
+          description: The IP address to retrieve information for
+          schema:
+            type: string
+            pattern: '^\d{1,3}(\.\d{1,3}){3}$'
+      responses:
+        "200":
+          description: Information about the IP address
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IPInfo"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    IPInfo:
+      type: object
+      properties:
+        ip:
+          type: string
+        success:
+          type: boolean
+        type:
+          type: string
+        continent:
+          type: string
+        continent_code:
+          type: string
+        country:
+          type: string
+        country_code:
+          type: string
+        region:
+          type: string
+        region_code:
+          type: string
+        city:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+        is_eu:
+          type: boolean
+        postal:
+          type: string
+        calling_code:
+          type: string
+        capital:
+          type: string
+        borders:
+          type: string
+        flag:
+          type: object
+          properties:
+            img:
+              type: string
+            emoji:
+              type: string
+            emoji_unicode:
+              type: string
+        connection:
+          type: object
+          properties:
+            asn:
+              type: integer
+            org:
+              type: string
+            isp:
+              type: string
+            domain:
+              type: string
+        timezone:
+          type: object
+          properties:
+            id:
+              type: string
+            abbr:
+              type: string
+            is_dst:
+              type: boolean
+            offset:
+              type: integer
+            utc:
+              type: string
+            current_time:
+              type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

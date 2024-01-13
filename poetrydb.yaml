@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Poetry Search API
+  description: API for searching and retrieving poems based on various criteria.
+  version: 1.0.0
+servers:
+  - url: https://poetrydb.org/
+    description: Poetry Search API Server
+paths:
+  /{inputField}/{searchTerm}:
+    get:
+      operationId: searchPoems
+      summary: Search for poems based on a single criteria.
+      parameters:
+        - in: path
+          name: inputField
+          required: true
+          schema:
+            type: string
+            enum: [author, title, lines, linecount, poemcount, random]
+          description: The input field to search (e.g., author, title).
+        - in: path
+          name: searchTerm
+          required: true
+          schema:
+            type: string
+          description: The search term related to the input field.
+        - in: query
+          name: searchType
+          schema:
+            type: string
+            enum: [abs]
+          description: Optional search type (e.g., exact match).
+        - in: query
+          name: outputField
+          schema:
+            type: string
+          description: Comma-separated output fields (e.g., author,title).
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum: [json, text]
+          description: Optional response format (default is JSON).
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  - title: "Ozymandias"
+                    author: "Percy Bysshe Shelley"
+                    lines: ["I met a traveller from an antique land", "..."]
+                    linecount: 14
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  title
+                  Ozymandias
+                  author
+                  Percy Bysshe Shelley
+                  linecount
+                  14
+
+  /{inputField1},{inputField2}/{searchTerm1};{searchTerm2}:
+    get:
+      operationId: combinedSearchTwoFields
+      summary: Combined search for poems based on two criteria.
+      parameters:
+        - in: path
+          name: inputField1
+          required: true
+          schema:
+            type: string
+            enum: [author, title, lines, linecount, poemcount, random]
+          description: The first input field to search.
+        - in: path
+          name: inputField2
+          required: true
+          schema:
+            type: string
+            enum: [author, title, lines, linecount, poemcount, random]
+          description: The second input field to search.
+        - in: path
+          name: searchTerm1
+          required: true
+          schema:
+            type: string
+          description: The search term related to the first input field.
+        - in: path
+          name: searchTerm2
+          required: true
+          schema:
+            type: string
+          description: The search term related to the second input field.
+        - in: query
+          name: searchType
+          schema:
+            type: string
+            enum: [abs]
+          description: Optional search type (e.g., exact match).
+        - in: query
+          name: outputField
+          schema:
+            type: string
+          description: Comma-separated output fields (e.g., author,title).
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum: [json, text]
+          description: Optional response format (default is JSON).
+      responses:
+        "200":
+          description: Combined search results for two fields
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  - title: "Sonnet 63: Against my love shall be as I am now"
+                    author: "William Shakespeare"
+                    linecount: 14
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  title: Sonnet 63: Against my love shall be as I am now
+                  author: William Shakespeare
+                  linecount: 14

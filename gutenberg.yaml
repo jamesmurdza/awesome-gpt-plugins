@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Gutendex API
+  description: API for accessing lists of books and individual book details from the Gutendex database.
+  version: 1.0.0
+servers:
+  - url: https://gutendex.com
+    description: Main API server for Gutendex
+
+paths:
+  /books:
+    get:
+      operationId: getBooks
+      summary: Retrieve a list of books
+      description: >-
+        Returns a list of books with pagination and various query options like author's year, copyright status, specific IDs, languages, MIME types, search terms, sorting, and topics.
+      parameters:
+        - name: author_year_start
+          in: query
+          description: Start year for the author's life.
+          required: false
+          schema:
+            type: integer
+        - name: author_year_end
+          in: query
+          description: End year for the author's life.
+          required: false
+          schema:
+            type: integer
+        - name: copyright
+          in: query
+          description: Copyright status of the books.
+          required: false
+          schema:
+            type: string
+        - name: ids
+          in: query
+          description: Comma-separated list of Project Gutenberg ID numbers.
+          required: false
+          schema:
+            type: string
+        - name: languages
+          in: query
+          description: Comma-separated list of two-character language codes.
+          required: false
+          schema:
+            type: string
+        - name: mime_type
+          in: query
+          description: MIME type for the books.
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Search terms for author names and book titles.
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sorting order of the books.
+          required: false
+          schema:
+            type: string
+          enum: [ascending, descending, popular]
+        - name: topic
+          in: query
+          description: Key-phrase in books' bookshelves or subjects.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A JSON array of book objects along with pagination details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
+
+  /books/{id}:
+    get:
+      operationId: getBookById
+      summary: Retrieve a specific book by its ID
+      description: Returns detailed information of a book by its Project Gutenberg ID number.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Project Gutenberg ID of the book.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Detailed information of a specific book.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        "404":
+          description: Error response when the book is not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        subjects:
+          type: array
+          items:
+            type: string
+        authors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Person"
+        translators:
+          type: array
+          items:
+            $ref: "#/components/schemas/Person"
+        bookshelves:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        copyright:
+          type: boolean
+          nullable: true
+        media_type:
+          type: string
+        formats:
+          type: object
+          additionalProperties:
+            type: string
+        download_count:
+          type: integer
+    Person:
+      type: object
+      properties:
+        birth_year:
+          type: integer
+          nullable: true
+        death_year:
+          type: integer
+          nullable: true
+        name:
+          type: string
