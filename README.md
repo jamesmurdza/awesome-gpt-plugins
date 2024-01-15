@@ -1,4 +1,21 @@
-# Aweome GPT Actions
+# Awesome GPT Actions
+
+## List of actions
+
+Copy the YAML file into your custom GPT to use. See below for more detailed instructions.
+
+| **Action**                      | **Description**                                          |
+|---------------------------------------------------|----------------------------------------------------------|
+| [aljazeera.yaml](aljazeera.yaml)                  | Get news from the homepage.                              |
+| [bbc.yaml](bbc.yaml)                              | Get news from the homepage.                              |
+| [nytimes.yaml](nytimes.yaml)                      | Get news from the homepage.                              |
+| [poetrydb.yaml](poetrydb.yaml)                    | Look up poems.                                           |
+| [ip-whois.yaml](ip-whois.yaml)                    | Look up the owner and location of an IP address.         |
+| [random-dog.yaml](random-dog.yaml)                | Provide an image of a dog.                               |
+| [coingecko.yaml](coingecko.yaml)                  | Look up current crypto prices.                           |
+| [gutenberg.yaml](gutenberg.yaml)                  | Search books.                                            |
+| [random-user.yaml](random-user.yaml)              | Provide fake user credentials.                           |
+| [us-national-weather.yaml](us-national-weather.yaml) | Get the current weather forecast for cities in the US. |
 
 ## How to use GPT Actions
 
