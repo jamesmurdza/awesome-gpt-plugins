@@ -1,0 +1,61 @@
+info:
+  version: 1.0.0
+  title: Rust Compiler API
+  license:
+    name: MIT
+servers:
+  - url: https://play.rust-lang.org
+    description: Online Rust Compiler Service
+paths:
+  /execute:
+    post:
+      operationId: compileAndRunRustCode
+      summary: Compiles and runs Rust code.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - channel
+                - mode
+                - edition
+                - crateType
+                - tests
+                - code
+              properties:
+                channel:
+                  type: string
+                  description: Rust compiler channel (e.g. stable)
+                mode:
+                  type: string
+                  description: Compilation mode (e.g. debug)
+                edition:
+                  type: string
+                  description: Rust edition (e.g. 2018)
+                crateType:
+                  type: string
+                  description: Type of the crate (e.g. bin)
+                tests:
+                  type: boolean
+                  description: Whether to run tests
+                code:
+                  type: string
+                  description: Rust code to compile and run
+      responses:
+        "200":
+          description: Successfully compiled and executed code.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stdout:
+                    type: string
+                  stderr:
+                    type: string
+        "4XX":
+          description: Client-side error (e.g., bad request, unauthorized).
+        "5XX":
+          description: Server-side error (e.g., internal server error, service unavailable).

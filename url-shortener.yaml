@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Ulvis URL Shortener API
+  version: 1.0.0
+  description: This is a simple API for shortening URLs using Ulvis service.
+servers:
+  - url: https://ulvis.net
+    description: Main API server for Ulvis URL shortener
+paths:
+  /api.php:
+    get:
+      operationId: shortenUrl
+      summary: Shortens a given URL
+      description: This endpoint shortens a provided URL and returns the shortened version.
+      parameters:
+        - name: url
+          in: query
+          required: true
+          description: The URL to be shortened
+          schema:
+            type: string
+            format: uri
+      responses:
+        "200":
+          description: A plain text containing the shortened URL
+          content:
+            text/plain:
+              schema:
+                type: string
