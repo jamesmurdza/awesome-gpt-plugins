@@ -16,6 +16,8 @@ Copy the YAML file into your custom GPT to use. See below for more detailed inst
 | [gutenberg.yaml](gutenberg.yaml)                  | Search books.                                            |
 | [random-user.yaml](random-user.yaml)              | Provide fake user credentials.                           |
 | [us-national-weather.yaml](us-national-weather.yaml) | Get the current weather forecast for cities in the US. |
+| [url-shortener.yaml](url-shortener.yaml)          | Generate a short URL.                                    |
+| [rust.yaml](rust.yaml)                            | Compile and run a Rust program.                          |
 
 ## How to use GPT Actions
 
