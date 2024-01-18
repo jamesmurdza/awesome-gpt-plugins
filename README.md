@@ -1,39 +1,39 @@
-# Awesome GPT Actions
+# Awesome GPT Plugins
 
-## List of actions
+In additional to prompting GPTs can be extended through actions (HTTP APIs) or uploading files or binaries. This repo is a collection of useful actions or binaries that can be used to add functionality to your GPT in one step.
 
-Copy the YAML file into your custom GPT to use. See below for more detailed instructions.
+## Actions
 
-| **Action**                      | **Description**                                          |
-|---------------------------------------------------|----------------------------------------------------------|
-| [aljazeera.yaml](aljazeera.yaml)                  | Get news from the homepage.                              |
-| [bbc.yaml](bbc.yaml)                              | Get news from the homepage.                              |
-| [nytimes.yaml](nytimes.yaml)                      | Get news from the homepage.                              |
-| [poetrydb.yaml](poetrydb.yaml)                    | Look up poems.                                           |
-| [ip-whois.yaml](ip-whois.yaml)                    | Look up the owner and location of an IP address.         |
-| [random-dog.yaml](random-dog.yaml)                | Provide an image of a dog.                               |
-| [coingecko.yaml](coingecko.yaml)                  | Look up current crypto prices.                           |
-| [gutenberg.yaml](gutenberg.yaml)                  | Search books.                                            |
-| [random-user.yaml](random-user.yaml)              | Provide fake user credentials.                           |
-| [us-national-weather.yaml](us-national-weather.yaml) | Get the current weather forecast for cities in the US. |
-| [url-shortener.yaml](url-shortener.yaml)          | Generate a short URL.                                    |
-| [rust.yaml](rust.yaml)                            | Compile and run a Rust program.                          |
+To add an action to your GPT, copy the YAML code into a new action. All of the examples below do not require authentication.
 
-## How to use GPT Actions
+For more detailed instructions, see [How to Use GPT Actions](Actions.md).
 
-First, create a new GPT:
+| **Action**                                              | **Description**                                        |
+| ------------------------------------------------------- | ------------------------------------------------------ |
+| [aljazeera](actions/aljazeera.yaml)                     | Get news from the homepage.                            |
+| [bbc](actions/bbc.yaml)                                 | Get news from the homepage.                            |
+| [nytimes](actions/nytimes.yaml)                         | Get news from the homepage.                            |
+| [poetrydb](actions/poetrydb.yaml)                       | Look up poems.                                         |
+| [ip-whois](actions/ip-whois.yaml)                       | Look up the owner and location of an IP address.       |
+| [random-dog](actions/random-dog.yaml)                   | Provide an image of a dog.                             |
+| [coingecko](actions/coingecko.yaml)                     | Look up current crypto prices.                         |
+| [gutenberg](actions/gutenberg.yaml)                     | Search books.                                          |
+| [random-user](actions/random-user.yaml)                 | Provide fake user credentials.                         |
+| [us-national-weather](actions/us-national-weather.yaml) | Get the current weather forecast for cities in the US. |
+| [url-shortener](actions/url-shortener.yaml)             | Generate a short URL.                                  |
+| [rust](actions/rust.yaml)                               | Compile and run a Rust program.                        |
 
-<img src="./tutorial/1.png" alt="1" style="zoom:50%;" />
+## Binaries
 
-<img src="./tutorial/2.png" alt="2" style="zoom:50%;" />
+The binaries below are able to be run by Code Interpreter.
 
-Then, create a new action:
+For detailed instructions, see [How to Use Binaries in GPT](Binaries.md).
 
-<img src="./tutorial/3.png" alt="3" style="zoom:50%;" />
+| Binary                                                       | Description                            |
+| ------------------------------------------------------------ | -------------------------------------- |
+| [deno-x86_64](https://github.com/denoland/deno/releases/download/v1.33.1/deno-x86_64-unknown-linux-gnu.zip) | Run JavaScript code to see the output. |
+| [php](https://static.simonwillison.net/static/2023/php)      | Run PHP code to see the output.        |
 
-Paste the YAML schema here:
+These both come from a well written [blog post by Simon Willison](https://til.simonwillison.net/llms/code-interpreter-expansions).
 
-<img src="./tutorial/4.png" alt="4" style="zoom:50%;" />
-
-Finally, test your GPT!
-
+Additionally, it is possible to ask Code Interpreter to compile a C binary, which you can then upload to a new GPT. Alternatively, you could upload a Python script or module.
