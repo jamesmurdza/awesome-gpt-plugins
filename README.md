@@ -2,6 +2,11 @@
 
 In additional to prompting GPTs can be extended through actions (HTTP APIs) or uploading files or binaries. This repo is a collection of useful actions or binaries that can be used to add functionality to your GPT in one step.
 
+## Contents
+
+- [Actions](#actions)
+- [Binaries](#binaries)
+
 ## Actions
 
 To add an action to your GPT, copy the YAML code into a new action. All of the examples below do not require authentication.
